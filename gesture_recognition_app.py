@@ -41,14 +41,25 @@ while True:
         # Find the predicted gesture
         predicted_gesture = np.argmax(predictions)
 
-        # Display the recognized gesture on the Streamlit app
-        st.subheader(f'Recognized Gesture: {predicted_gesture}')
+        # Display the recognized gesture as a label
+        gesture_labels = ["Gesture 0: Fist", "Gesture 1: Open Hand", "Gesture 2: Thumbs Up", ...]
+        cv2.putText(frame, gesture_labels[predicted_gesture], (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
-        # Display the webcam feed in the Streamlit app
-        image_placeholder.image(frame, use_column_width=True, channels='BGR', caption='Live Feed')
+        # Display the gesture image if available
+        gesture_images = [cv2.imread("gesture0.png"), cv2.imread("gesture1.png"), ...]
+        gesture_image = gesture_images[predicted_gesture]
+        frame[10:10+gesture_image.shape[0], 200:200+gesture_image.shape[1]] = gesture_image
 
+        # Display the frame in a window
+        cv2.imshow('Hand Gesture Recognition', frame)
+
+        # Break the loop when the 'q' key is pressed
+        key = cv2.waitKey(1)
+        if key == ord('q'):
+            break
     except KeyboardInterrupt:
         break
+
 
 # Release the webcam
 cap.release()
