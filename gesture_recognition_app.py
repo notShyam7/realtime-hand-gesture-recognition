@@ -4,7 +4,7 @@ import tensorflow as tf
 import cv2
 
 # Load your trained model
-model = tf.keras.models.load_model('/Users/ghanshyam/Desktop/handgesture/realtime-hand-gesture-recognition/gestures.h5')  # Update with the path to your model file
+model = tf.keras.models.load_model('gestures.h5')  # Update with the path to your model file
 
 # Define a function to preprocess the frame for model input
 def preprocess_frame(frame):
