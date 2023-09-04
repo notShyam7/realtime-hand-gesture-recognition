@@ -17,11 +17,15 @@ st.title('Hand Gesture Recognition')
 
 # Streamlit UI
 st.header('Live Webcam Feed')
-image_placeholder = st.image([], use_column_width=True, channels='BGR', caption='Live Feed')
+
+# Change it to something like this:
+image_placeholder = st.empty()
 
 # OpenCV VideoCapture
 cap = cv2.VideoCapture(0)
 
+
+# Inside your while loop, update the image placeholder with the live feed
 while True:
     try:
         ret, frame = cap.read()
