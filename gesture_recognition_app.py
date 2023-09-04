@@ -1,11 +1,11 @@
-
 import streamlit as st
-import cv2
 import numpy as np
 import tensorflow as tf
+import cv2
 
 # Load your trained model
-model = tf.keras.models.load_model('/Users/ghanshyam/Desktop/handgesture/realtime-hand-gesture-recognition/gestures.h5')
+model = tf.keras.models.load_model('/Users/ghanshyam/Desktop/handgesture/realtime-hand-gesture-recognition/gestures.h5')  # Update with the path to your model file
+
 # Define a function to preprocess the frame for model input
 def preprocess_frame(frame):
     frame = cv2.resize(frame, (64, 64))
@@ -15,12 +15,12 @@ def preprocess_frame(frame):
 # Set up Streamlit
 st.title('Hand Gesture Recognition')
 
-# OpenCV VideoCapture
-cap = cv2.VideoCapture(0)
-
 # Streamlit UI
 st.header('Live Webcam Feed')
-st.image([], use_column_width=True, channels='BGR', caption='Live Feed')
+image_placeholder = st.image([], use_column_width=True, channels='BGR', caption='Live Feed')
+
+# OpenCV VideoCapture
+cap = cv2.VideoCapture(0)
 
 while True:
     try:
@@ -41,7 +41,7 @@ while True:
         st.subheader(f'Recognized Gesture: {predicted_gesture}')
 
         # Display the webcam feed in the Streamlit app
-        st.image(frame, use_column_width=True, channels='BGR', caption='Live Feed')
+        image_placeholder.image(frame, use_column_width=True, channels='BGR', caption='Live Feed')
 
     except KeyboardInterrupt:
         break
