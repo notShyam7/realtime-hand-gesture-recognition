@@ -22,7 +22,7 @@ st.header('Live Webcam Feed')
 image_placeholder = st.empty()
 
 # OpenCV VideoCapture
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 
 # Inside your while loop, update the image placeholder with the live feed
